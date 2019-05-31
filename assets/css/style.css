@@ -645,7 +645,6 @@ input::-ms-input-placeholder {
 
 /*home section*/
 .home{
-    background: url(../images/homebg.jpg) no-repeat 100% 100%;
     background-size: cover;
 }
 
@@ -717,19 +716,16 @@ input::-ms-input-placeholder {
     width: 250px;
     height: 180px;
     margin-left:20px;
-    background: url(../images/stabmenubg.png) no-repeat top center;
     border:0px;
     transition: all 0.6s;
 }
 .service_tabe_menu.nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
-    background: url(../images/stabmenubghv.png) no-repeat top center;
     width:250px;
     height: 180px;
     color:#fff;
 
 }
 .service_tabe ul li a:hover{
-    background: url(../images/stabmenubghv.png) no-repeat top center;
     color:#fff;
 }
 .service_tabe ul li a i{
@@ -774,7 +770,6 @@ input::-ms-input-placeholder {
 /*video section css*/
 
 .video{
-    background: url(../images/videobg.jpg) no-repeat top center;
     background-size:cover;
 }
 .video .main_video{
@@ -812,7 +807,6 @@ input::-ms-input-placeholder {
 .about .single_about .single_ab_icon i{
     width: 100px;
     height: 105px;
-    background: url(../images/iconbg1.png) no-repeat center center;
     line-height: 100px;
     text-align: center;
     color: #444;
@@ -822,7 +816,6 @@ input::-ms-input-placeholder {
 }
 
 .about .single_about:hover .single_ab_icon i {
-    background: url(../images/iconbg1h.png) no-repeat center center;
     color: #fff;
 
 }
@@ -848,7 +841,6 @@ input::-ms-input-placeholder {
 }
 
 .about_skill_area .about_tabe .about_tabe_menu li a{
-    background: url(../images/skmenubg.png) no-repeat top center;
     width:175px;
     height: 60px;
     line-height: 50px;
@@ -863,11 +855,9 @@ input::-ms-input-placeholder {
 .about_skill_area .about_tabe .about_tabe_menu li.active a:hover, .about_tabe_menu li.active a:focus {
     color: #fff;
     cursor: pointer;
-    background: url(../images/skmenubgh.png) no-repeat top center;
 }
 .about_skill_area .about_tabe .about_tabe_menu li a:hover{
     color: #fff;
-    background: url(../images/skmenubgh.png) no-repeat top center;
 }
 
 
@@ -922,7 +912,6 @@ input::-ms-input-placeholder {
 /*counter section css*/
 /*counter section css*/
 .counter{
-    background: url(../images/counterbg.jpg) no-repeat top center;
     background-size: cover;
 }
 .counter .main_counter_area{}
@@ -978,7 +967,6 @@ input::-ms-input-placeholder {
 .othersservice .single_othersservice .single_othersservice_icon h4 i{
     color:#444;
     font-size:2rem;
-    background: url(../images/iconbg2.png) no-repeat center center;
     width:64px;
     height:65px;
     line-height: 65px;
@@ -987,7 +975,6 @@ input::-ms-input-placeholder {
     transition: 0.6s; 
 }
 .othersservice .single_othersservice:hover .single_othersservice_icon h4 i{
-    background: url(../images/iconbgh2.png) no-repeat center center; 
     color:#fff;
 }
 .othersservice .single_othersservice .single_othersservice_content{
@@ -1094,7 +1081,6 @@ input::-ms-input-placeholder {
     font-size: 1.575rem;
     display: inline-block;
     margin-right: 15px;
-    background: url(../images/ch_col_icn.png) no-repeat left center;
     width:49px;
     height: 48px;
     line-height: 48px;
@@ -1103,7 +1089,6 @@ input::-ms-input-placeholder {
 }
 .choose .main_choose .single_choose .single_choose_acording .panel-title:hover a i{
     color: #fff;
-    background: url(../images/ch_col_icn_h.png) no-repeat left center;
 }
 .choose .main_choose .single_choose .single_choose_acording .panel-title a i.fa-chevron-down{
     float:right;
@@ -1317,7 +1302,6 @@ button.btn-md:hover {
 
 /* Carousel */
 .testimonial{
-    background: url(../images/testbg.jpg) no-repeat center center;
     background-size: cover;
 }
 .main_testimonial {
@@ -1369,7 +1353,6 @@ button.btn-md:hover {
 
 /*contact section css*/
 .contact{
-    background: url(../images/contactbg.png) no-repeat center center;
     background-size: cover;
 }
 
@@ -1388,7 +1371,6 @@ button.btn-md:hover {
     height: 56px;
     line-height: 56px;
     color:#444;
-    background: url(../images/info_iconbg.png) no-repeat;
     font-size: 1.5rem;
     padding-left: 15px;
 }
@@ -1403,7 +1385,6 @@ button.btn-md:hover {
 /*maps section css*/
 
 .maps{
-    background: url(../images/mapbg.jpg) no-repeat top center;
     overflow: hidden;
     background-size: cover;
     position:relative;
