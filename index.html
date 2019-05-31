@@ -63,8 +63,8 @@
                   <div class="row">
                      <div class="col-sm-12 ">
                         <div class="main_home_slider text-center">
-                           <div class="single_home_slider">
-                              <div id="FinChart" class="main_home wow fadeInUp" data-wow-duration="700ms" style="color:white">
+                           <div id="FinChart" class="single_home_slider">
+                              <div class="main_home wow fadeInUp" data-wow-duration="700ms" style="color:white">
                                  <h2>
                                     <script> document.write(new Date().toDateString()); </script>
                                  </h2>
@@ -136,7 +136,7 @@
              .outerRadius(function(d) { return Math.max(0, y(d.y1)); });
          
          
-         var svg = d3.select("#home").append("svg")
+         var svg = d3.select("#FinChart").append("svg")
              .attr("width", width)
              .attr("height", height)
            .append("g")
