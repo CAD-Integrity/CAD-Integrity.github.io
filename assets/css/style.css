@@ -209,6 +209,10 @@ p:last-child {
 .text {
     color: #333333;
 }
+.path {
+  stroke: #fff;
+  fill-rule: evenodd;
+}
 .colorstext {
     color: #5e9a28;
 }
