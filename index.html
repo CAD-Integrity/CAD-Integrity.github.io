@@ -2,17 +2,17 @@
 <html>
    <style>
 
-path {
-  stroke: #fff;
-  fill-rule: evenodd;
-}
+      path {
+            stroke: #fff;
+            fill-rule: evenodd;
+           }
 
-text {
-  font-family: Arial, sans-serif;
-  font-size: 12px;
-}
+      text {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+           }
 
-</style>
+   </style>
    <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -143,7 +143,7 @@ text {
          //d3.json("/d/4063550/flare.json", function(error, root) {
          
          
-         var root =  getData2();
+         var root =  getData();
          
          var g = svg.selectAll("g")
            .data(partition.nodes(root)).enter().append("g");
