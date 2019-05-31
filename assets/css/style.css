@@ -209,7 +209,7 @@ p:last-child {
 .text {
     color: #333333;
 }
-.path {
+path {
   stroke: #fff;
   fill-rule: evenodd;
 }
