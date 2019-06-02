@@ -331,9 +331,7 @@
          d3.select(self.frameElement).style("height", diameter - 150 + "px");
          
          function mouseover(d)
-         {
-         	d3.selectAll('.links .link').sort(function(a, b){ return d.related_links.indexOf(a.id); });	
-         	
+         {         	
              for (var i = 0; i < d.related_nodes.length; i++)
              {
                  d3.select('#' + d.related_nodes[i]).classed('highlight', true);
