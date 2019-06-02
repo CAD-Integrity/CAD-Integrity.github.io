@@ -1,17 +1,31 @@
 <!doctype html>
 <html>
    <style>
-
-      path {
-            stroke: #fff;
-            fill-rule: evenodd;
-           }
-
+      svg {
+      font: 12px sans-serif;
+      }
       text {
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-           }
-
+      pointer-events: none;
+      }
+      .inner_node rect {
+      pointer-events: all;
+      }
+      .inner_node rect.highlight {
+      }
+      .outer_node circle {
+      fill: #fff;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+      pointer-events: all;
+      }
+      .outer_node circle.highlight
+      {
+      stroke: #315B7E;
+      stroke-width: 2px;
+      }
+      .link {
+      fill: none;
+      }
    </style>
    <head>
       <meta charset="utf-8">
@@ -72,22 +86,22 @@
          </header>
          <section id="home" class="home" style="background-color:black;">
             <div class="main_home_slider text-center">
-                <div id="FinChart" class="single_home_slider">
-                     <div class="main_home wow fadeInUp" data-wow-duration="700ms" style="color:white">
-                         <h2>
-                             <script> document.write(new Date().toDateString()); </script>
-                         </h2>
-                     </div>
-                </div>
-                <div class="single_home_slider">
-                     <div class="main_home wow fadeInUp" data-wow-duration="700ms">
-                     </div>
-                </div>
-                <div class="single_home_slider">
-                     <div class="main_home wow fadeInUp" data-wow-duration="700ms">
-                     </div>
-                </div>
-             </div>
+               <div id="FinChart" class="single_home_slider">
+                  <div class="main_home wow fadeInUp" data-wow-duration="700ms" style="color:white">
+                     <h2>
+                        <script> document.write(new Date().toDateString()); </script>
+                     </h2>
+                  </div>
+               </div>
+               <div class="single_home_slider">
+                  <div class="main_home wow fadeInUp" data-wow-duration="700ms">
+                  </div>
+               </div>
+               <div class="single_home_slider">
+                  <div class="main_home wow fadeInUp" data-wow-duration="700ms">
+                  </div>
+               </div>
+            </div>
          </section>
          <section class="footer" style="background-color:black;">
             <div class="container">
@@ -118,201 +132,241 @@
       <script src="assets/js/plugins.js"></script>
       <script src="assets/js/main.js"></script>
       <script>
-         var width = 500,
-           height = 600,
-           radius = Math.min(width, height) / 2;
-         
-         var x = d3.scale.linear().range([0, 2 * Math.PI]);
-         var y = d3.scale.sqrt().range([0, radius]);
-         var color = d3.scale.category10();
-         
-         var svg = d3.select("#FinChart").append("svg")
-           .attr("width", width)
-           .attr("height", height)
-           .append("g").attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ") rotate(-90 0 0)");
-         
-         var partition = d3.layout.partition()
-           .value(function (d) { return d.size; });
-         
-         var arc = d3.svg.arc()
-           .startAngle(function (d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x))); })
-           .endAngle(function (d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x + d.dx))); })
-           .innerRadius(function (d) { return Math.max(0, y(d.y)); })
-           .outerRadius(function (d) { return Math.max(0, y(d.y + d.dy)); });
-         
-         //d3.json("/d/4063550/flare.json", function(error, root) {
+         var data=[['PASS',['delphi_odbrc++','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['FAIL',[]],['Load 5m',['delphi_odbrc++','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['Load 10m',[]],['Load 20m',[]],['Load > 20m',[]],['PDB 5m',['delphi_odbrc++','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['PDB 10m',[]],['PDB 20m',[]],['PDB > 20m',[]],['Finalize 5m',['delphi_odbrc++','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['Finalize 10m',[]],['Finalize 20m',[]],['Finalize > 20m',[]],['Clean 5m',['delphi_odbrc++','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['Clean 10m',[]],['Clean 20m',[]],['Clean > 20m',[]],['Cover 5m',['delphi_odbrc++','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['Cover 10m',[]],['Cover 20m',[]],['Cover > 20m',[]],['Stitch 5m',['delphi_odbrc++','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['Stitch 10m',[]],['Stitch 20m',[]],['Stitch > 20m',[]]];
          
          
-         var root =  getData();
+         var outer = d3.map();
+         var inner = [];
+         var links = [];
          
-         var g = svg.selectAll("g")
-           .data(partition.nodes(root)).enter().append("g");
+         var outerId = [0];
          
-         var path = g.append("path").attr("d", arc)
-           .style("fill", function (d) { return color((d.children ? d : d.parent).name); })
-           .on("click", click);
+         data.forEach(function(d){
+         	
+         	if (d == null)
+         		return;
+         	
+         	i = { id: 'i' + inner.length, name: d[0], related_links: [] };
+         	i.related_nodes = [i.id];
+         	inner.push(i);
+         	
+         	if (!Array.isArray(d[1]))
+         		d[1] = [d[1]];
+         	
+         	d[1].forEach(function(d1){
+         		
+         		o = outer.get(d1);
+         		
+         		if (o == null)
+         		{
+         			o = { name: d1,	id: 'o' + outerId[0], related_links: [] };
+         			o.related_nodes = [o.id];
+         			outerId[0] = outerId[0] + 1;	
+         			
+         			outer.set(d1, o);
+         		}
+         		
+         		
+         		l = { id: 'l-' + i.id + '-' + o.id, inner: i, outer: o }
+         		links.push(l);
+         		
+         		
+         		i.related_nodes.push(o.id);
+         		i.related_links.push(l.id);
+         		o.related_nodes.push(i.id);
+         		o.related_links.push(l.id);
+         	});
+         });
          
-         //.append("text")
-         var text = g.append("text").attr("x", function (d) { return y(d.y); })
-           .attr("dx", "6") // margin
-         	.attr("dy", ".35em") // vertical-align
-           .attr("transform", function (d) { return "rotate(" + computeTextRotation(d) + ")"; })
-           .text(function (d) { return d.name; })
-           .style("fill","white");
-         
-         function computeTextRotation(d) {
-           var angle = x(d.x + d.dx / 2) - Math.PI / 2;
-           return angle / Math.PI * 180;
+         data = {
+         	inner: inner,
+         	outer: outer.values(),
+         	links: links
          }
          
          
-         function click(d) {
-           // fade out all text elements
-           if(d.size !== undefined) {
-             d.size += 100;
-           };
-           text.transition().attr("opacity", 0);
-         
-           path.transition().duration(750)
-             .attrTween("d", arcTween(d))
-             .each("end", function (e, i) {
-             // check if the animated element's data e lies within the visible angle span given in d
-             if (e.x >= d.x && e.x < (d.x + d.dx)) {
-               // get a selection of the associated text element
-               var arcText = d3.select(this.parentNode).select("text");
-               // fade in the text element and recalculate positions
-               arcText.transition().duration(750)
-                 .attr("opacity", 1)
-                 .attr("transform", function () { return "rotate(" + computeTextRotation(e) + ")" })
-                 .attr("x", function (d) { return y(d.y); });
-             }
-           });
-         } 
-         
-         // Word wrap!
-         var insertLinebreaks = function (t, d, width) {
-           alert(0)
-           var el = d3.select(t);
-           var p = d3.select(t.parentNode);
-           p.append("g").attr("x", function (d) { return y(d.y); })
-             .attr("transform", function (d) { return "rotate(" + computeTextRotation(d) + ")"; })
-             .append("foreignObject")
-             .attr('x', -width/2)
-             .attr("width", width).attr("height", 200)
-             .append("xhtml:p").attr('style','word-wrap: break-word; text-align:center;')
-             .html(d.name);
-           alert(1)
-           el.remove();
-           alert(2);
-         };
+         outer = data.outer;
+         data.outer = Array(outer.length);
          
          
-         d3.select(self.frameElement).style("height", height + "px");
+         var i1 = 0;
+         var i2 = outer.length - 1;
          
-         // Interpolate the scales!
-         function arcTween(d) {
-           var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
-             yd = d3.interpolate(y.domain(), [d.y, 1]),
-             yr = d3.interpolate(y.range(), [d.y ? 20 : 0, radius]);
-           return function (d, i) {
-             return i ? function (t) {
-               return arc(d);
-             } : function (t) {
-               x.domain(xd(t));
-               y.domain(yd(t)).range(yr(t));
-               return arc(d);
-             };
-           };
+         for (var i = 0; i < data.outer.length; ++i)
+         {
+         	if (i % 2 == 1)
+         		data.outer[i2--] = outer[i];
+         	else
+         		data.outer[i1++] = outer[i];
          }
          
-         function getData() {
-             return {
-          "name": "Root",
-          "children": [
-           {
-            "name": "A1",
-            "children": [
-               {"name": "B1", "size": 30},
-               {"name": "B2", "size": 40},
-               {"name": "B3",
-         	"children":[
-         	    {"name": "C1", "size": 10},
-                     {"name": "C2", "size": 15}
-         	]
-                }
-              ]
-             },
-             {
-              "name": "A2",
-              "children": [
-               {"name": "B4", "size": 40},
-               {"name": "B5", "size": 30},
-               {"name": "B6", "size": 10}
-              ]
-             },
-             {
-              "name": "A3",
-              "children": [
-               {"name": "B7", "size": 50},
-               {"name": "B8", "size": 15}
-         	
-              ]
-             },
-             {
-              "name": "A4",
-              "children": [
-               {"name": "B7", "size": 50},
-               {"name": "B8", "size": 15}
-         	
-              ]
-             },
-             {
-              "name": "A5",
-              "children": [
-               {"name": "B7", "size": 50},
-               {"name": "B8", "size": 15}
-         	
-              ]
-             },
-             {
-              "name": "A6",
-              "children": [
-               {"name": "B7", "size": 50},
-               {"name": "B8", "size": 15}
-         	
-              ]
-             }
-            ]
-           }
-         };
+         //console.log(data.outer.reduce(function(a,b) { return a + b.related_links.length; }, 0) / data.outer.length);
          
-         function getData2() {
-             return {
-         		"name":"Root",
-         		"children":
-         		[
-         			{
-         				"name": "tk5311",
-         				"children":
-         				[
-         					{"name": "B4", "size": 40},
-         					{"name": "B5", "size": 30},
-         					{"name": "B6", "size": 10}
-         				]
-         			},
-         			{
-         				"name": "tk5327",
-         				"children":
-         				[
-         					{"name": "B1", "size": 70},
-         					{"name": "B2", "size": 30},
-         					{"name": "B3", "size": 10}
-         				]
-         			}
-         		]
-             }
+         
+         
+         fetch("test.json")
+           .then(response => response.json())
+           .then(json => console.log(json));
+         
+         var diameter = 960;
+         var rect_width = 80;
+         var rect_height = 14;
+         
+         var link_width = "2px"; 
+         var link_color="#222222"
+         
+         var il = data.inner.length;
+         var ol = data.outer.length;
+         
+         var inner_y = d3.scale.linear()
+             .domain([0, il])
+             .range([-(il * rect_height)/2, (il * rect_height)/2+2*rect_height]);
+         
+         mid = (data.outer.length/2.0)
+         var outer_x = d3.scale.linear()
+             .domain([0, mid, mid, data.outer.length])
+             .range([15, 170, 190 ,355]);
+         
+         var outer_y = d3.scale.linear()
+             .domain([0, data.outer.length])
+             .range([0, diameter / 2 - 120]);
+         
+         
+         
+         data.outer = data.outer.map(function(d, i) { 
+             d.x = outer_x(i);
+             d.y = diameter/3;
+             return d;
+         });
+         
+         data.inner = data.inner.map(function(d, i) { 
+             d.x = -(rect_width / 2);
+             d.y = inner_y(i);
+             return d;
+         });
+         
            
-         };
+         
+         
+         function projectX(x)
+         {
+             return ((x - 90) / 180 * Math.PI) - (Math.PI/2);
+         }
+         
+         var diagonal = d3.svg.diagonal()
+             .source(function(d) { return {"x": d.outer.y * Math.cos(projectX(d.outer.x)), 
+                                           "y": -d.outer.y * Math.sin(projectX(d.outer.x))}; })            
+             .target(function(d) { return {"x": d.inner.y + rect_height/2,
+                                           "y": d.outer.x > 180 ? d.inner.x : d.inner.x + rect_width}; })
+             .projection(function(d) { return [d.y, d.x]; });
+         
+         
+         var svg = d3.select("body").append("svg")
+             .attr("width", diameter)
+             .attr("height", diameter)
+           .append("g")
+             .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
+             
+         
+         
+         var link = svg.append('g').attr('class', 'links').selectAll(".link")
+             .data(data.links)
+           .enter().append('path')
+             .attr('class', 'link')
+             .attr('id', function(d) { return d.id })
+             .attr("d", diagonal)
+         	.attr('stroke', '#ababab55')
+             .attr('stroke-width', link_width);
+         
+         
+         
+         var onode = svg.append('g').selectAll(".outer_node")
+             .data(data.outer)
+           .enter().append("g")
+             .attr("class", "outer_node")
+             .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+             .on("mouseover", mouseover)
+             .on("mouseout", mouseout);
+           
+         onode.append("circle")
+             .attr('id', function(d) { return d.id })
+             .attr("r", 4.5);
+           
+         onode.append("circle")
+             .attr('r', 20)
+             .attr('visibility', 'hidden');
+           
+         onode.append("text")
+         	.attr('id', function(d) { return d.id + '-txt'; })
+             .attr("dy", ".31em")
+             .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+             .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
+         	.attr('fill','#efefef55')
+             .text(function(d) { return d.name; });
+           
+         
+           
+         var inode = svg.append('g').selectAll(".inner_node")
+             .data(data.inner)
+           .enter().append("g")
+             .attr("class", "inner_node")
+             .attr("transform", function(d, i) { return "translate(" + d.x + "," + d.y + ")"})
+             .on("mouseover", mouseover)
+             .on("mouseout", mouseout);
+           
+         inode.append('rect')
+             .attr('width', rect_width)
+             .attr('height', rect_height)
+             .attr('id', function(d) { return d.id; })
+             .attr('fill', '#000000');
+           
+         inode.append("text")
+         	.attr('id', function(d) { return d.id + '-txt'; })
+             .attr('text-anchor', 'middle')
+             .attr("transform", "translate(" + rect_width/2 + ", " + rect_height * .75 + ")")
+         	.attr('fill','#efefef55')
+             .text(function(d) { return d.name; });
+         
+         
+         d3.select(self.frameElement).style("height", diameter - 150 + "px");
+         
+         function mouseover(d)
+         {
+         	d3.selectAll('.links .link').sort(function(a, b){ return d.related_links.indexOf(a.id); });	
+         	
+             for (var i = 0; i < d.related_nodes.length; i++)
+             {
+                 d3.select('#' + d.related_nodes[i]).classed('highlight', true);
+                 d3.select('#' + d.related_nodes[i] + '-txt').attr("font-weight", 'bold');
+         		d3.select('#' + d.related_nodes[i] + '-txt').attr("font-size", 'large');
+         		d3.select('#' + d.related_nodes[i]+'-txt').attr("fill", '#0da4d399');
+         
+             }
+             
+             for (var i = 0; i < d.related_links.length; i++)
+         	{
+                 d3.select('#' + d.related_links[i]).attr('stroke-width', '4px');
+         		d3.select('#' + d.related_links[i]).attr('stroke', '#0da4d399');
+         	}
+         }
+         
+         function mouseout(d)
+         {   	
+             for (var i = 0; i < d.related_nodes.length; i++)
+             {
+                 d3.select('#' + d.related_nodes[i]).classed('highlight', false);
+                 d3.select('#' + d.related_nodes[i] + '-txt').attr("font-weight", 'normal');
+         		d3.select('#' + d.related_nodes[i] + '-txt').attr("font-size", 'medium');
+         		d3.select('#' + d.related_nodes[i]+'-txt').attr("fill", '#efefef55');
+             }
+             
+             for (var i = 0; i < d.related_links.length; i++)
+         	{
+                 d3.select('#' + d.related_links[i]).attr('stroke-width', link_width);
+         		d3.select('#' + d.related_links[i]).attr('stroke', '#ababab55');
+         	}
+         }
+         
       </script>
    </body>
 </html>
