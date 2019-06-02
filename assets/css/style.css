@@ -146,9 +146,11 @@ input[type="color"],
 h1,
 h2,
 h3 {
-    font-weight: 400;
-    margin: 0;
+    font-weight: normal;
     font-family: 'Montserrat', sans-serif;
+	margin:auto;
+    line-height:51px;
+    vertical-align:middle;
 }
 h4,
 h5 {
@@ -562,15 +564,24 @@ input::-ms-input-placeholder {
     margin: 15px auto;
 }
 .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus{
-    color:#ff7200;
+    color:#4ab96e;
     background: transparent;
 }
-.main_menu_bg .navbar {}
+.main_menu_bg 
+{}
+
+.navbar-header {
+	word-spacing: 10px;
+	color:#4ab96e;
+	text-align:center;
+    left:365px;
+	position:absolute;
+}
 
 .main_menu_bg .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus{
-    color: #ff7200;
+    color: #4ab96e;
     padding-bottom: 22px;
-    border-bottom: 1px solid #ff7200;
+    border-bottom: 1px solid #4ab96e;
     background: transparent;
 
 }
@@ -615,12 +626,12 @@ input::-ms-input-placeholder {
 
 .dropdown-menu .navbar-form .form-group input[type="text"]{
     background-color:rgba(34, 61, 97, 0.68);
-    border: 1px solid #ff7200;
-    color:#ff7200;
+    border: 1px solid #4ab96e;
+    color:#4ab96e;
     width: 300px;
 }
 .dropdown-menu .navbar-form .form-group .form-control::-webkit-input-placeholder{
-    color: #ff7200;
+    color: #4ab96e;
     opacity: 1; 
 }
 .dropdown-menu .navbar-form {
@@ -679,7 +690,7 @@ input::-ms-input-placeholder {
 }
 
 .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
-    background: #ff7200;
+    background: #4ab96e;
 }
 .owl-theme .owl-dots .owl-dot span {
     -webkit-border-radius: 0px;
@@ -903,7 +914,7 @@ input::-ms-input-placeholder {
 }
 
 .skillbar-bar.blue {
-    background-color: #ff7200;
+    background-color: #4ab96e;
     height: 5px;
     width: 0;
 }
@@ -928,7 +939,7 @@ input::-ms-input-placeholder {
     font-size:2.8125rem;
 }
 .counter .main_counter_area .single_counter i{
-    color:#ff7200;
+    color:#4ab96e;
     font-size:1.875rem;
     display: inline-block;
     margin-top:20px;
@@ -1039,7 +1050,7 @@ input::-ms-input-placeholder {
 }
 .team .single_team_content .single_team_text_overlay .team_overlay_socail a:hover i{
     background: #fff;
-    color:#ff7200;
+    color:#4ab96e;
 }
 
 
