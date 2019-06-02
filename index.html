@@ -298,11 +298,13 @@
            
          onode.append("text")
          	.attr('id', function(d) { return d.id + '-txt'; })
-             .attr("dy", ".31em")
-             .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
-             .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
+            .attr("dy", ".31em")
+            .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+            .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
          	.attr('fill','#efefef55')
-             .text(function(d) { return d.name; });
+            .attr('font-weight','normal')
+	         .attr('font-size','medium')
+            .text(function(d) { return d.name; });
            
          
            
@@ -322,10 +324,12 @@
            
          inode.append("text")
          	.attr('id', function(d) { return d.id + '-txt'; })
-             .attr('text-anchor', 'middle')
-             .attr("transform", "translate(" + rect_width/2 + ", " + rect_height * .75 + ")")
+            .attr('text-anchor', 'middle')
+            .attr("transform", "translate(" + rect_width/2 + ", " + rect_height * .75 + ")")
          	.attr('fill','#efefef55')
-             .text(function(d) { return d.name; });
+            .attr('font-weight','normal')
+	         .attr('font-size','medium')
+            .text(function(d) { return d.name; });
          
          
          d3.select(self.frameElement).style("height", diameter - 150 + "px");
@@ -336,15 +340,15 @@
              {
                  d3.select('#' + d.related_nodes[i]).classed('highlight', true);
                  d3.select('#' + d.related_nodes[i] + '-txt').attr("font-weight", 'bold');
-         		d3.select('#' + d.related_nodes[i] + '-txt').attr("font-size", 'large');
-         		d3.select('#' + d.related_nodes[i]+'-txt').attr("fill", '#0da4d399');
+         		  d3.select('#' + d.related_nodes[i] + '-txt').attr("font-size", 'large');
+         		  d3.select('#' + d.related_nodes[i]+'-txt').attr("fill", '#0da4d399');
          
              }
              
              for (var i = 0; i < d.related_links.length; i++)
          	{
                  d3.select('#' + d.related_links[i]).attr('stroke-width', '4px');
-         		d3.select('#' + d.related_links[i]).attr('stroke', '#0da4d399');
+         		  d3.select('#' + d.related_links[i]).attr('stroke', '#0da4d399');
          	}
          }
          
@@ -354,14 +358,14 @@
              {
                  d3.select('#' + d.related_nodes[i]).classed('highlight', false);
                  d3.select('#' + d.related_nodes[i] + '-txt').attr("font-weight", 'normal');
-         		d3.select('#' + d.related_nodes[i] + '-txt').attr("font-size", 'medium');
-         		d3.select('#' + d.related_nodes[i]+'-txt').attr("fill", '#efefef55');
+         		  d3.select('#' + d.related_nodes[i] + '-txt').attr("font-size", 'medium');
+         		  d3.select('#' + d.related_nodes[i]+'-txt').attr("fill", '#efefef55');
              }
              
              for (var i = 0; i < d.related_links.length; i++)
          	{
                  d3.select('#' + d.related_links[i]).attr('stroke-width', link_width);
-         		d3.select('#' + d.related_links[i]).attr('stroke', '#ababab55');
+         		  d3.select('#' + d.related_links[i]).attr('stroke', '#ababab55');
          	}
          }
          
