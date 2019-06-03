@@ -71,11 +71,14 @@
                                  <img src="assets/images/compLogo.png"/>
                                  </a>
                               </div>
-							  <div class="navbar-header">
-								 <h2>
-									 As of <script> document.write(new Date().toDateString()); </script>
-								 </h2>
-							  </div>
+			      <div class="navbar-header">
+				 <h2>
+				    As of <script> fetch("date.txt")
+           						.then(response => response.text())
+           						.then(json => console.log(json)); 
+					  </script>
+				 </h2>
+			      </div>
                               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                  <ul class="nav navbar-nav navbar-right">
                                     <li><a href="#home">HOME</a></li>
