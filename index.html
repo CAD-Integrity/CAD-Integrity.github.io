@@ -137,7 +137,7 @@
          .then(function(json)
          {
               
-         data=json.Data;
+         var data=json.Data;
          document.getElementById("datum").innerHTML = "As of "+json.Date;
           
                 var outer = d3.map();
