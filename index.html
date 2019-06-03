@@ -146,7 +146,12 @@
      	     .then(function(content){ return content.text()})
              .then(function(txt){data2=txt});
 	      
-	 console.log(data2);
+	      let jsondata;    
+	 fetch("data.txt")
+	     .then(function(u){ return u.text();})
+	     .then(function(json){jsondata = json;})
+	      
+	 console.log(jsondata);
 	      
          var outer = d3.map();
          var inner = [];
