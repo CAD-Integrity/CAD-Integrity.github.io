@@ -133,19 +133,14 @@
       <script src="assets/js/main.js"></script>
       <script>
          
-         fetch('data.txt')
-            .then(response => response.text())
-            .then(function(text)
+         fetch('data.json')
+            .then(response => response.json())
+            .then(function(json)
          {
-            console.log(text);
-         var jsonContent=JSON.parse(text);
-         /*fetch("data.json")
-         .then(response => response.json())
-         .then(function(json)
-         {*/
+            console.log(json);
               
-         var data=jsonContent.Data;
-         document.getElementById("datum").innerHTML = "As of "+jsonContent.Date;
+         var data=json.Data;
+         document.getElementById("datum").innerHTML = "As of "+json.Date;
           
                 var outer = d3.map();
                 var inner = [];
