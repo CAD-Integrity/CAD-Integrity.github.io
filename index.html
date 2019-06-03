@@ -140,11 +140,11 @@
       <script>
          var data=[['PASS',['DB31','delphi_odbrc++','EthernetBoard','ftdi_breakout_odb','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tidcdw8','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['FAIL',[]],['Load 5m',['DB31','delphi_odbrc++','EthernetBoard','ftdi_breakout_odb','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tidcdw8','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['Load 10m',[]],['Load 20m',[]],['Load > 20m',[]],['PDB 5m',['DB31','delphi_odbrc++','EthernetBoard','ftdi_breakout_odb','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tidcdw8','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['PDB 10m',[]],['PDB 20m',[]],['PDB > 20m',[]],['Finalize 5m',['delphi_odbrc++','EthernetBoard','ftdi_breakout_odb','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['Finalize 10m',['DB31']],['Finalize 20m',[]],['Finalize > 20m',['tidcdw8']],['Clean 5m',['DB31','delphi_odbrc++','EthernetBoard','ftdi_breakout_odb','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['Clean 10m',['tidcdw8']],['Clean 20m',[]],['Clean > 20m',[]],['Cover 5m',['DB31','delphi_odbrc++','EthernetBoard','ftdi_breakout_odb','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tidcdw8','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['Cover 10m',[]],['Cover 20m',[]],['Cover > 20m',[]],['Stitch 5m',['DB31','delphi_odbrc++','EthernetBoard','ftdi_breakout_odb','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['Stitch 10m',[]],['Stitch 20m',['tidcdw8']],['Stitch > 20m',[]]];
          
-	 var data2;
+	 let data2;
 	      
 	 fetch("data.txt")
-     	     .then(response => response.text())
-             .then(json => data2 = json);
+     	     .then(function(content){ return content.text()})
+             .then(function(txt){data2=txt});
 	      
 	 console.log(data2);
 	      
