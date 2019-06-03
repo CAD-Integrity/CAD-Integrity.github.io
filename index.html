@@ -132,10 +132,17 @@
       <script src="assets/js/plugins.js"></script>
       <script src="assets/js/main.js"></script>
       <script>
-         fetch("data.json")
+         
+         fetch('data.json')
+            .then(response => {return response.json();})
+            .then(json => 
+         {
+         console.log(json);
+
+         /*fetch("data.json")
          .then(response => response.json())
          .then(function(json)
-         {
+         {*/
               
          var data=json.Data;
          document.getElementById("datum").innerHTML = "As of "+json.Date;
@@ -374,6 +381,10 @@
                 		  d3.select('#' + d.related_links[i]).attr('stroke', '#ababab55');
                 	}
                 }
+            
+            }).catch(err => 
+         {
+            console.log(err);
          });
              
       </script>
