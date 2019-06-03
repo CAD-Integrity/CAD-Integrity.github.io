@@ -71,14 +71,9 @@
                                  <img src="assets/images/compLogo.png"/>
                                  </a>
                               </div>
-			      <div class="navbar-header">
-				 <h2 id="datum">
-					<script> fetch("date.txt")
-           					      .then(response => response.text())
-           					      .then(json => document.getElementById("datum").innerHTML = "As of "+json); 
-					</script>
-				 </h2>
-			      </div>
+                              <div class="navbar-header">
+                                 <h2 id="datum"></h2>
+                              </div>
                               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                  <ul class="nav navbar-nav navbar-right">
                                     <li><a href="#home">HOME</a></li>
@@ -96,7 +91,6 @@
             <div class="main_home_slider text-center">
                <div id="FinChart" class="single_home_slider">
                   <div class="main_home wow fadeInUp" data-wow-duration="700ms" style="color:white">
-                     
                   </div>
                </div>
                <div class="single_home_slider">
@@ -138,255 +132,250 @@
       <script src="assets/js/plugins.js"></script>
       <script src="assets/js/main.js"></script>
       <script>
-         var data=[['PASS',['DB31','delphi_odbrc++','EthernetBoard','ftdi_breakout_odb','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tidcdw8','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['FAIL',[]],['Load 5m',['DB31','delphi_odbrc++','EthernetBoard','ftdi_breakout_odb','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tidcdw8','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['Load 10m',[]],['Load 20m',[]],['Load > 20m',[]],['PDB 5m',['DB31','delphi_odbrc++','EthernetBoard','ftdi_breakout_odb','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tidcdw8','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['PDB 10m',[]],['PDB 20m',[]],['PDB > 20m',[]],['Finalize 5m',['delphi_odbrc++','EthernetBoard','ftdi_breakout_odb','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['Finalize 10m',['DB31']],['Finalize 20m',[]],['Finalize > 20m',['tidcdw8']],['Clean 5m',['DB31','delphi_odbrc++','EthernetBoard','ftdi_breakout_odb','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['Clean 10m',['tidcdw8']],['Clean 20m',[]],['Clean > 20m',[]],['Cover 5m',['DB31','delphi_odbrc++','EthernetBoard','ftdi_breakout_odb','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tidcdw8','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['Cover 10m',[]],['Cover 20m',[]],['Cover > 20m',[]],['Stitch 5m',['DB31','delphi_odbrc++','EthernetBoard','ftdi_breakout_odb','IC1001BRD','MDBU006A','PCBOdb','riaa_amp','s6sbp502a-va1','SimpleNetTie','soldering_challenge','tk5311','tk5327','vtsm_1_pcb_v3.0_091222']],['Stitch 10m',[]],['Stitch 20m',['tidcdw8']],['Stitch > 20m',[]]];
-         
-	 let data2;
-	      
-	 fetch("data.txt")
-     	     .then(function(content){ return content.text()})
-             .then(function(txt){data2=txt});
-	      
-	      let jsondata;    
-	 fetch("data.txt")
-	     .then(function(u){ return u.text();})
-	     .then(function(json){jsondata = json;})
-	      
-	 console.log(jsondata);
-	      
-         var outer = d3.map();
-         var inner = [];
-         var links = [];
-         
-         var outerId = [0];
-         
-         data.forEach(function(d){
-         	
-         	if (d == null)
-         		return;
-         	
-         	i = { id: 'i' + inner.length, name: d[0], related_links: [] };
-         	i.related_nodes = [i.id];
-         	inner.push(i);
-         	
-         	if (!Array.isArray(d[1]))
-         		d[1] = [d[1]];
-         	
-         	d[1].forEach(function(d1){
-         		
-         		o = outer.get(d1);
-         		
-         		if (o == null)
-         		{
-         			o = { name: d1,	id: 'o' + outerId[0], related_links: [] };
-         			o.related_nodes = [o.id];
-         			outerId[0] = outerId[0] + 1;	
-         			
-         			outer.set(d1, o);
-         		}
-         		
-         		
-         		l = { id: 'l-' + i.id + '-' + o.id, inner: i, outer: o }
-         		links.push(l);
-         		
-         		
-         		i.related_nodes.push(o.id);
-         		i.related_links.push(l.id);
-         		o.related_nodes.push(i.id);
-         		o.related_links.push(l.id);
-         	});
-         });
-         
-         data = {
-         	inner: inner,
-         	outer: outer.values(),
-         	links: links
-         }
-         
-         
-         outer = data.outer;
-         data.outer = Array(outer.length);
-         
-         
-         var i1 = 0;
-         var i2 = outer.length - 1;
-         
-         for (var i = 0; i < data.outer.length; ++i)
+         fetch("data.json")
+         .then(response => response.json())
+         .then(function(json)
          {
-         	if (i % 2 == 1)
-         		data.outer[i2--] = outer[i];
-         	else
-         		data.outer[i1++] = outer[i];
-         }
-         
-         //console.log(data.outer.reduce(function(a,b) { return a + b.related_links.length; }, 0) / data.outer.length);
-         
-         
-         
-         /*fetch("test.json")
-           .then(response => response.json())
-           .then(json => console.log(json));*/
-         
-         var diameter = 960;
-         var rect_width = 100;
-         var rect_height = 18;
-         
-         var link_width = "2px"; 
-         var link_color="#222222"
-         
-         var il = data.inner.length;
-         var ol = data.outer.length;
-         
-         var inner_y = d3.scale.linear()
-             .domain([0, il])
-             .range([-(il * rect_height)/2, (il * rect_height)/2+2*rect_height]);
-         
-         mid = (data.outer.length/2.0)
-         var outer_x = d3.scale.linear()
-             .domain([0, mid, mid, data.outer.length])
-             .range([15, 170, 190 ,355]);
-         
-         var outer_y = d3.scale.linear()
-             .domain([0, data.outer.length])
-             .range([0, diameter / 2 - 120]);
+              
+         data=json.Data;
+         document.getElementById("datum").innerHTML = "As of "+json.Date;
+          
+                var outer = d3.map();
+                var inner = [];
+                var links = [];
+                
+                var outerId = [0];
+                
+                data.forEach(function(d){
+                	
+                	if (d == null)
+                		return;
          
          
-         
-         data.outer = data.outer.map(function(d, i) { 
-             d.x = outer_x(i);
-             d.y = diameter/3;
-             return d;
+                	i = { id: 'i' + inner.length, name: d.Property, related_links: [] };
+                	i.related_nodes = [i.id];
+                	inner.push(i);
+                	
+                	if (!Array.isArray(d.Boards))
+                		d.Boards = [d.Boards];
+                	
+                	d.Boards.forEach(function(d1){
+                		
+                		o = outer.get(d1);
+                		
+                		if (o == null)
+                		{
+                			o = { name: d1,	id: 'o' + outerId[0], related_links: [] };
+                			o.related_nodes = [o.id];
+                			outerId[0] = outerId[0] + 1;	
+                			
+                			outer.set(d1, o);
+                		}
+                		
+                		
+                		l = { id: 'l-' + i.id + '-' + o.id, inner: i, outer: o }
+                		links.push(l);
+                		
+                		
+                		i.related_nodes.push(o.id);
+                		i.related_links.push(l.id);
+                		o.related_nodes.push(i.id);
+                		o.related_links.push(l.id);
+                	});
+                });
+                
+                data = {
+                	inner: inner,
+                	outer: outer.values(),
+                	links: links
+                }
+                
+                
+                outer = data.outer;
+                data.outer = Array(outer.length);
+                
+                
+                var i1 = 0;
+                var i2 = outer.length - 1;
+                
+                for (var i = 0; i < data.outer.length; ++i)
+                {
+                	if (i % 2 == 1)
+                		data.outer[i2--] = outer[i];
+                	else
+                		data.outer[i1++] = outer[i];
+                }
+                
+                //console.log(data.outer.reduce(function(a,b) { return a + b.related_links.length; }, 0) / data.outer.length);
+                
+                
+                
+                /*fetch("test.json")
+                  .then(response => response.json())
+                  .then(json => console.log(json));*/
+                
+                var diameter = 960;
+                var rect_width = 100;
+                var rect_height = 18;
+                
+                var link_width = "2px"; 
+                var link_color="#222222"
+                
+                var il = data.inner.length;
+                var ol = data.outer.length;
+                
+                var inner_y = d3.scale.linear()
+                    .domain([0, il])
+                    .range([-(il * rect_height)/2, (il * rect_height)/2+2*rect_height]);
+                
+                mid = (data.outer.length/2.0)
+                var outer_x = d3.scale.linear()
+                    .domain([0, mid, mid, data.outer.length])
+                    .range([15, 170, 190 ,355]);
+                
+                var outer_y = d3.scale.linear()
+                    .domain([0, data.outer.length])
+                    .range([0, diameter / 2 - 120]);
+                
+                
+                
+                data.outer = data.outer.map(function(d, i) { 
+                    d.x = outer_x(i);
+                    d.y = diameter/3;
+                    return d;
+                });
+                
+                data.inner = data.inner.map(function(d, i) { 
+                    d.x = -(rect_width / 2);
+                    d.y = inner_y(i);
+                    return d;
+                });
+                
+                  
+                
+                
+                function projectX(x)
+                {
+                    return ((x - 90) / 180 * Math.PI) - (Math.PI/2);
+                }
+                
+                var diagonal = d3.svg.diagonal()
+                    .source(function(d) { return {"x": d.outer.y * Math.cos(projectX(d.outer.x)), 
+                                                  "y": -d.outer.y * Math.sin(projectX(d.outer.x))}; })            
+                    .target(function(d) { return {"x": d.inner.y + rect_height/2,
+                                                  "y": d.outer.x > 180 ? d.inner.x : d.inner.x + rect_width}; })
+                    .projection(function(d) { return [d.y, d.x]; });
+                
+                
+                var svg = d3.select("#FinChart").append("svg")
+                    .attr("width", diameter)
+                    .attr("height", diameter)
+                  .append("g")
+                    .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
+                    
+                
+                
+                var link = svg.append('g').attr('class', 'links').selectAll(".link")
+                    .data(data.links)
+                  .enter().append('path')
+                    .attr('class', 'link')
+                    .attr('id', function(d) { return d.id })
+                    .attr("d", diagonal)
+                	.attr('stroke', '#ababab55')
+                    .attr('stroke-width', link_width);
+                
+                
+                
+                var onode = svg.append('g').selectAll(".outer_node")
+                    .data(data.outer)
+                  .enter().append("g")
+                    .attr("class", "outer_node")
+                    .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+                    .on("mouseover", mouseover)
+                    .on("mouseout", mouseout);
+                  
+                onode.append("circle")
+                    .attr('id', function(d) { return d.id })
+                    .attr("r", 4.5);
+                  
+                onode.append("circle")
+                    .attr('r', 20)
+                    .attr('visibility', 'hidden');
+                  
+                onode.append("text")
+                	.attr('id', function(d) { return d.id + '-txt'; })
+                   .attr("dy", ".31em")
+                   .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+                   .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
+                	.attr('fill','#efefef55')
+                   .attr('font-weight','normal')
+                 .attr('font-size','medium')
+                   .text(function(d) { return d.name; });
+                  
+                
+                  
+                var inode = svg.append('g').selectAll(".inner_node")
+                    .data(data.inner)
+                  .enter().append("g")
+                    .attr("class", "inner_node")
+                    .attr("transform", function(d, i) { return "translate(" + d.x + "," + d.y + ")"})
+                    .on("mouseover", mouseover)
+                    .on("mouseout", mouseout);
+                  
+                inode.append('rect')
+                    .attr('width', rect_width)
+                    .attr('height', rect_height)
+                    .attr('id', function(d) { return d.id; })
+                    .attr('fill', '#000000');
+                  
+                inode.append("text")
+                	.attr('id', function(d) { return d.id + '-txt'; })
+                   .attr('text-anchor', 'middle')
+                   .attr("transform", "translate(" + rect_width/2 + ", " + rect_height * .75 + ")")
+                	.attr('fill','#efefef55')
+                   .attr('font-weight','normal')
+                 .attr('font-size','medium')
+                   .text(function(d) { return d.name; });
+                
+                
+                d3.select(self.frameElement).style("height", diameter - 150 + "px");
+                
+                function mouseover(d)
+                {         	
+                    for (var i = 0; i < d.related_nodes.length; i++)
+                    {
+                        d3.select('#' + d.related_nodes[i]).classed('highlight', true);
+                        d3.select('#' + d.related_nodes[i] + '-txt').attr("font-weight", 'bold');
+                		  d3.select('#' + d.related_nodes[i] + '-txt').attr("font-size", 'large');
+                		  d3.select('#' + d.related_nodes[i]+'-txt').attr("fill", '#0da4d3bb');
+                
+                    }
+                    
+                    for (var i = 0; i < d.related_links.length; i++)
+                	{
+                        d3.select('#' + d.related_links[i]).attr('stroke-width', '4px');
+                		  d3.select('#' + d.related_links[i]).attr('stroke', '#0da4d399');
+                	}
+                }
+                
+                function mouseout(d)
+                {   	
+                    for (var i = 0; i < d.related_nodes.length; i++)
+                    {
+                        d3.select('#' + d.related_nodes[i]).classed('highlight', false);
+                        d3.select('#' + d.related_nodes[i] + '-txt').attr("font-weight", 'normal');
+                		  d3.select('#' + d.related_nodes[i] + '-txt').attr("font-size", 'medium');
+                		  d3.select('#' + d.related_nodes[i]+'-txt').attr("fill", '#efefef55');
+                    }
+                    
+                    for (var i = 0; i < d.related_links.length; i++)
+                	{
+                        d3.select('#' + d.related_links[i]).attr('stroke-width', link_width);
+                		  d3.select('#' + d.related_links[i]).attr('stroke', '#ababab55');
+                	}
+                }
          });
-         
-         data.inner = data.inner.map(function(d, i) { 
-             d.x = -(rect_width / 2);
-             d.y = inner_y(i);
-             return d;
-         });
-         
-           
-         
-         
-         function projectX(x)
-         {
-             return ((x - 90) / 180 * Math.PI) - (Math.PI/2);
-         }
-         
-         var diagonal = d3.svg.diagonal()
-             .source(function(d) { return {"x": d.outer.y * Math.cos(projectX(d.outer.x)), 
-                                           "y": -d.outer.y * Math.sin(projectX(d.outer.x))}; })            
-             .target(function(d) { return {"x": d.inner.y + rect_height/2,
-                                           "y": d.outer.x > 180 ? d.inner.x : d.inner.x + rect_width}; })
-             .projection(function(d) { return [d.y, d.x]; });
-         
-         
-         var svg = d3.select("#FinChart").append("svg")
-             .attr("width", diameter)
-             .attr("height", diameter)
-           .append("g")
-             .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
              
-         
-         
-         var link = svg.append('g').attr('class', 'links').selectAll(".link")
-             .data(data.links)
-           .enter().append('path')
-             .attr('class', 'link')
-             .attr('id', function(d) { return d.id })
-             .attr("d", diagonal)
-         	.attr('stroke', '#ababab55')
-             .attr('stroke-width', link_width);
-         
-         
-         
-         var onode = svg.append('g').selectAll(".outer_node")
-             .data(data.outer)
-           .enter().append("g")
-             .attr("class", "outer_node")
-             .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
-             .on("mouseover", mouseover)
-             .on("mouseout", mouseout);
-           
-         onode.append("circle")
-             .attr('id', function(d) { return d.id })
-             .attr("r", 4.5);
-           
-         onode.append("circle")
-             .attr('r', 20)
-             .attr('visibility', 'hidden');
-           
-         onode.append("text")
-         	.attr('id', function(d) { return d.id + '-txt'; })
-            .attr("dy", ".31em")
-            .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
-            .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
-         	.attr('fill','#efefef55')
-            .attr('font-weight','normal')
-	         .attr('font-size','medium')
-            .text(function(d) { return d.name; });
-           
-         
-           
-         var inode = svg.append('g').selectAll(".inner_node")
-             .data(data.inner)
-           .enter().append("g")
-             .attr("class", "inner_node")
-             .attr("transform", function(d, i) { return "translate(" + d.x + "," + d.y + ")"})
-             .on("mouseover", mouseover)
-             .on("mouseout", mouseout);
-           
-         inode.append('rect')
-             .attr('width', rect_width)
-             .attr('height', rect_height)
-             .attr('id', function(d) { return d.id; })
-             .attr('fill', '#000000');
-           
-         inode.append("text")
-         	.attr('id', function(d) { return d.id + '-txt'; })
-            .attr('text-anchor', 'middle')
-            .attr("transform", "translate(" + rect_width/2 + ", " + rect_height * .75 + ")")
-         	.attr('fill','#efefef55')
-            .attr('font-weight','normal')
-	         .attr('font-size','medium')
-            .text(function(d) { return d.name; });
-         
-         
-         d3.select(self.frameElement).style("height", diameter - 150 + "px");
-         
-         function mouseover(d)
-         {         	
-             for (var i = 0; i < d.related_nodes.length; i++)
-             {
-                 d3.select('#' + d.related_nodes[i]).classed('highlight', true);
-                 d3.select('#' + d.related_nodes[i] + '-txt').attr("font-weight", 'bold');
-         		  d3.select('#' + d.related_nodes[i] + '-txt').attr("font-size", 'large');
-         		  d3.select('#' + d.related_nodes[i]+'-txt').attr("fill", '#0da4d3bb');
-         
-             }
-             
-             for (var i = 0; i < d.related_links.length; i++)
-         	{
-                 d3.select('#' + d.related_links[i]).attr('stroke-width', '4px');
-         		  d3.select('#' + d.related_links[i]).attr('stroke', '#0da4d399');
-         	}
-         }
-         
-         function mouseout(d)
-         {   	
-             for (var i = 0; i < d.related_nodes.length; i++)
-             {
-                 d3.select('#' + d.related_nodes[i]).classed('highlight', false);
-                 d3.select('#' + d.related_nodes[i] + '-txt').attr("font-weight", 'normal');
-         		  d3.select('#' + d.related_nodes[i] + '-txt').attr("font-size", 'medium');
-         		  d3.select('#' + d.related_nodes[i]+'-txt').attr("fill", '#efefef55');
-             }
-             
-             for (var i = 0; i < d.related_links.length; i++)
-         	{
-                 d3.select('#' + d.related_links[i]).attr('stroke-width', link_width);
-         		  d3.select('#' + d.related_links[i]).attr('stroke', '#ababab55');
-         	}
-         }
-         
       </script>
    </body>
 </html>
