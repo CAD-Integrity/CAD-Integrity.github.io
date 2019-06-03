@@ -133,19 +133,18 @@
       <script src="assets/js/main.js"></script>
       <script>
          
-         fetch('https://github.com/CAD-Integrity/CAD-Integrity.github.io/blob/master/data.json')
-            .then(response => {return response.json();})
-            .then(json => 
+         fetch('data.txt')
+            .then(response => response.text())
+            .then(function(text)
          {
-         console.log(json);
-
+         var jsonContent=JSON.parse(text);
          /*fetch("data.json")
          .then(response => response.json())
          .then(function(json)
          {*/
               
-         var data=json.Data;
-         document.getElementById("datum").innerHTML = "As of "+json.Date;
+         var data=jsonContent.Data;
+         document.getElementById("datum").innerHTML = "As of "+jsonContent.Date;
           
                 var outer = d3.map();
                 var inner = [];
